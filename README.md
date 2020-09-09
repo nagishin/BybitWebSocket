@@ -10,7 +10,7 @@
 # Bybit WebSocketインスタンス生成
 bybit_ws = BybitWS('API_KEY', 'API_SECRET', is_testnet=False, symbol='BTCUSD', channel=[], callback={})
 ```
-<br>
+
 **購読するチャンネルリスト**には使用するチャンネルを指定してください.<br>
 (省略すると以下のdefaultチャンネルを購読します.)
 ```
@@ -24,7 +24,7 @@ channel_list = [
     'order',
 ]
 ```
-<br>
+
 **チャンネル別のコールバック関数dict**は各チャンネルのデータ受信をトリガーとして呼び出される関数を設定します.<br>
 dictの**key**に**チャンネルを示すtopic**, **value**に**コールバック関数**を指定してください.<br>
 (dictに未設定またはvalueがNoneのチャンネルはコールバックされません.)
@@ -38,7 +38,7 @@ callback = {
     'order'     : callback_order,     # order受信でcallback_order関数を呼び出し
 }
 ```
-<br>
+
 **コールバック関数**は引数に**BybitWSインスタンス, 受信データ**を設定してください.
 ```
 #-------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ def callback_execution(ws:BybitWS, data:dict):
         msg += '\n'
     print(msg)
 ```
-<br>
+
 **BybitWS**インスタンスで受信したデータは**data**に格納されます.<br>
 必要なデータを参照してください.
 ```
