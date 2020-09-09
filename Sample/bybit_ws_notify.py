@@ -493,13 +493,9 @@ class BybitWS(object):
 #-------------------------------------------------------------------------------
 # [@param]
 #     ws           BybitWSインスタンス
-#     data         API SECRET
-#     is_testnet   True:testnet, False:real
-#     symbol       通貨ペア
-#     channel      購読するチャンネルリスト
-#     callback     チャンネル別のコールバック関数dict
+#     data         受信data
 # [return]
-#---------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 def callback_ohlcv(ws:BybitWS, data:dict):
     now_time = datetime.now(timezone('Asia/Tokyo')).strftime('%Y/%m/%d %H:%M:%S')
     msg = f'[ohlcv] {now_time}\n'
@@ -514,6 +510,11 @@ def callback_ohlcv(ws:BybitWS, data:dict):
 
 #-------------------------------------------------------------------------------
 # 自注文データ受信時に呼び出される関数
+#-------------------------------------------------------------------------------
+# [@param]
+#     ws           BybitWSインスタンス
+#     data         受信data
+# [return]
 #-------------------------------------------------------------------------------
 def callback_order(ws:BybitWS, data:dict):
     now_time = datetime.now(timezone('Asia/Tokyo')).strftime('%Y/%m/%d %H:%M:%S')
@@ -553,6 +554,11 @@ def callback_order(ws:BybitWS, data:dict):
 #-------------------------------------------------------------------------------
 # 自注文の約定データ受信時に呼び出される関数
 #-------------------------------------------------------------------------------
+# [@param]
+#     ws           BybitWSインスタンス
+#     data         受信data
+# [return]
+#-------------------------------------------------------------------------------
 def callback_execution(ws:BybitWS, data:dict):
     now_time = datetime.now(timezone('Asia/Tokyo')).strftime('%Y/%m/%d %H:%M:%S')
     msg = f'[execution] {now_time}\n'
@@ -576,6 +582,11 @@ def callback_execution(ws:BybitWS, data:dict):
 
 #-------------------------------------------------------------------------------
 # ポジションデータ受信時に呼び出される関数
+#-------------------------------------------------------------------------------
+# [@param]
+#     ws           BybitWSインスタンス
+#     data         受信data
+# [return]
 #-------------------------------------------------------------------------------
 def callback_position(ws:BybitWS, data:dict):
     now_time = datetime.now(timezone('Asia/Tokyo')).strftime('%Y/%m/%d %H:%M:%S')
