@@ -5,13 +5,13 @@
 `pip install -U -r requirements.txt`
 
 ## BybitWSクラス
-コンストラクタ引数に`API情報, 接続先, 通貨ペア, 購読するチャンネルリスト, チャンネル別のコールバック関数dict`を指定してインスタンスを生成してください.
+コンストラクタ引数に**API情報, 接続先, 通貨ペア, 購読するチャンネルリスト, チャンネル別のコールバック関数dict**を指定してインスタンスを生成してください.
 ```
 # Bybit WebSocketインスタンス生成
 bybit_ws = BybitWS('API_KEY', 'API_SECRET', is_testnet=False, symbol='BTCUSD', channel=[], callback={})
 ```
-
-`購読するチャンネルリスト`には使用するチャンネルを指定してください.
+<br>
+**購読するチャンネルリスト**には使用するチャンネルを指定してください.<br>
 (省略すると以下のdefaultチャンネルを購読します.)
 ```
 channel_list = [
@@ -24,9 +24,9 @@ channel_list = [
     'order',
 ]
 ```
-
-`チャンネル別のコールバック関数dict`は各チャンネルのデータ受信をトリガーとして呼び出される関数を設定します.
-dictの`key`に`チャンネルを示すtopic`, `value`に`コールバック関数`を指定してください.
+<br>
+**チャンネル別のコールバック関数dict**は各チャンネルのデータ受信をトリガーとして呼び出される関数を設定します.<br>
+dictの**key**に**チャンネルを示すtopic**, **value**に**コールバック関数**を指定してください.<br>
 (dictに未設定またはvalueがNoneのチャンネルはコールバックされません.)
 ```
 callback = {
@@ -38,8 +38,8 @@ callback = {
     'order'     : callback_order,     # order受信でcallback_order関数を呼び出し
 }
 ```
-
-`コールバック関数`は引数に`BybitWSインスタンス, 受信データ`を設定してください.
+<br>
+**コールバック関数**は引数に**BybitWSインスタンス, 受信データ**を設定してください.
 ```
 #-------------------------------------------------------------------------------
 # ex) 自注文の約定データ受信時に呼び出される関数
@@ -61,8 +61,8 @@ def callback_execution(ws:BybitWS, data:dict):
         msg += '\n'
     print(msg)
 ```
-
-`BybitWS`インスタンスで受信したデータは`data`に格納されます.
+<br>
+**BybitWS**インスタンスで受信したデータは**data**に格納されます.<br>
 必要なデータを参照してください.
 ```
 # 受信データ格納dict
@@ -83,7 +83,7 @@ data = {
     'my_open_order':{},
 }
 ```
-orderbookは更新頻度が高いため, 取得する場合は`get_orderbooks関数`を使用してください.
+orderbookは更新頻度が高いため, 取得する場合は**get_orderbooks関数**を使用してください.<br>
 排他制御にて安全にデータ取得します.
 ```
 #---------------------------------------------------------------------------
@@ -97,9 +97,9 @@ def get_orderbooks(self):
 ```
 
 ## 状態通知botの使い方
-`bybit_ws_notify.py`の1ファイルで完結しています.
-(シンプルに使用できるようBybitWSや必要なクラス, 設定情報をあえて1ファイルに含めています.)
-pythonスクリプト内の冒頭にある`設定パラメータ`に必要情報を設定して起動してください.
+**bybit_ws_notify.py**の1ファイルで完結しています.<br>
+(シンプルに使用できるようBybitWSや必要なクラス, 設定情報をあえて1ファイルに含めています.)<br>
+pythonスクリプト内の冒頭にある**設定パラメータ**に必要情報を設定して起動してください.
 ```
 #===============================================================================
 # 設定パラメータ
@@ -127,5 +127,5 @@ BYBIT_PERIOD           = '1'  # ohlcv時間足 (1 3 5 15 30 60 120 240 360 D W M
 https://note.com/asim0613/n/n23073851a93c
 
 ## 参考文献
-[Python Bybit websocket](https://note.com/1one/n/n26615e8b5f76)
-[bybit api document](https://bybit-exchange.github.io/docs/inverse/#t-websocket)
+* [Python Bybit websocket](https://note.com/1one/n/n26615e8b5f76)
+* [bybit api document](https://bybit-exchange.github.io/docs/inverse/#t-websocket)
