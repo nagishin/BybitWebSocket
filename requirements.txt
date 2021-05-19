@@ -2,6 +2,6 @@ DateTime
 pytz
 requests
 requests-oauthlib
-websocket-client
+websocket-client==1.0.0
 simplejson
 sortedcontainers

@@ -115,8 +115,7 @@ class BybitWS(object):
                                             on_message=self.__on_message,
                                             on_close=self.__on_close,
                                             on_open=self.__on_open,
-                                            on_error=self.__on_error,
-                                            header=None)
+                                            on_error=self.__on_error)
 
             self.logger.info('Connecting WebSocket...')
 
@@ -155,7 +154,7 @@ class BybitWS(object):
     #---------------------------------------------------------------------------
     # [WebSocket] on open
     #---------------------------------------------------------------------------
-    def __on_open(self):
+    def __on_open(self, ws):
         self.logger.info('WebSocket opend.')
 
         if 'position' in self.channel_list or 'order' in self.channel_list or 'execution' in self.channel_list:
@@ -177,13 +176,13 @@ class BybitWS(object):
     #---------------------------------------------------------------------------
     # [WebSocket] on close
     #---------------------------------------------------------------------------
-    def __on_close(self):
+    def __on_close(self, ws):
         self.logger.info('WebSocket Closed.')
 
     #---------------------------------------------------------------------------
     # [WebSocket] on error
     #---------------------------------------------------------------------------
-    def __on_error(self, error):
+    def __on_error(self, ws, error):
         self.logger.error(f'WebSocket Error : {error}')
         self.__exit()
         self.__connect(self.endpoint)
@@ -191,7 +190,7 @@ class BybitWS(object):
     #---------------------------------------------------------------------------
     # [WebSocket] on message
     #---------------------------------------------------------------------------
-    def __on_message(self, message):
+    def __on_message(self, ws, message):
         try:
             message = json.loads(message)
             topic = message.get('topic')
